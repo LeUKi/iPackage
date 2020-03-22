@@ -3,10 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <title>iPackage | 查询快递</title>
-    <script src="jquery-3.4.1.js"></script>
-    <script src="js.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.js"></script>
+    <style>
+        .fR {
+            float: right;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.70);
+        }
+    </style>
+    <link rel="stylesheet" href="icheck-bootstrap.css">
 </head>
-<body>
-<div id="AllExs">快递列表</div>
+<body style="background: url(0.jpeg) no-repeat top fixed;">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #461483">
+    <div class="container col-md-8 col-lg-7 col-xl-5">
+        <a class="navbar-brand" href="#">iPackage</a>
+        <button type="button" id="addr-btn" class="btn btn-sm fa fa-address-book-o"
+                style="background-color: #461483;color: #ffffff">
+        </button>
+    </div>
+</nav>
+<div class="container col-md-8 col-lg-7 col-xl-5" style="margin-top:70px">
+    <div class="card" id="addr-notes">
+        <div class="card-body">
+            123br <br><br><br>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <input type="text" class="form-control" id="searchcontent">
+            <form>
+
+                <input type="radio" id="someRadioId1" name="optradio"/>
+                <label class="radio-inline" type="radio" for="someRadioId1">Option 1</label>
+                <input type="radio" id="someRadioId1" name="optradio"/>
+                <label class="radio-inline" type="radio" for="someRadioId1">Option 1</label>
+                <input type="radio" id="someRadioId1" name="optradio"/>
+                <label class="radio-inline" type="radio" for="someRadioId1">Option 1</label>
+
+            </form>
+        </div>
+    </div>
+    <div id="AllExs">快递列表</div>
+    <div class="card">
+        <div class="card-header">
+            <div style="position: absolute;left: 40%;">寄件人
+                <div class="fa fa-arrow-right"> 收件人</div>
+            </div>
+            <a href="#" data-toggle="tooltip" title="135353535535" class="fR">收件人</a>
+            <a href="#" data-toggle="tooltip" title="969696969696!">寄件人</a>
+        </div>
+        <div class="card-body">
+            <div class="card-body">快递类型：1</div>
+            <div class="card-body">收件地址：<a href="#" data-toggle="tooltip" title="969696969696!">收件地址</a></div>
+        </div>
+        <div class="card-footer">
+            寄件时间：2020-03-03T14:19:17.000+0000
+            <div class="btn-group-sm fR">
+                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">编辑
+                </button>
+                <button type="button" class="btn btn-sm btn-danger">删除
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 模态框 -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">模态框头部</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="card-header">
+                    <div style="position: absolute;left: 50%;">
+                        <div class="fa fa-arrow-right"></div>
+                    </div>
+                    <a href="#" data-toggle="tooltip" title="135353535535" class="fR">收件人</a>
+                    <a href="#" data-toggle="tooltip" title="969696969696!">寄件人</a>
+                </div>
+                <div class="card-body">
+                    <div class="card-body">快递类型：1</div>
+                    <div class="card-body">收件地址：</div>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js.js"></script>
 </body>
 </html>
