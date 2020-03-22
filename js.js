@@ -1,8 +1,9 @@
 function findByID(pID) {
     var getUrl = "http://118.178.125.139:8080/findByExpressOrderID?id=" + pID;
     $.get(getUrl, function (data, status) {
-        if (data.extended.ExpressOrder.id) {
-            var Pdata = [];
+        var Content = "";
+        if (data.extended.ExpressOrder != null) {
+            Pdata = [];
             Pdata[0] = data.extended.ExpressOrder.id;
             Pdata[1] = data.extended.ExpressOrder.sender;
             Pdata[2] = data.extended.ExpressOrder.sender_phone;
@@ -13,7 +14,7 @@ function findByID(pID) {
             Pdata[7] = data.extended.ExpressOrder.adress.adr;
             Pdata[8] = data.extended.ExpressOrder.adress.phone;
             Pdata[9] = data.extended.ExpressOrder.adress.recipient;
-            var Content = "<br><div class=\"card\"><div class=\"card-header\">快递单号：" +
+            Content += "<br><div class=\"card\"><div class=\"card-header\">快递单号：" +
                 Pdata[0] + " <button type=\"button\" class=\"btn btn-sm fR disP-btn\">展开/收缩</button></div><div class=\"disP\"><div class=\"card-body\"><div style=\"position: absolute;left: 40%;\">寄件人<div class=\"fa fa-arrow-right\"> 收件人</div></div><a href=\"#\" data-toggle=\"tooltip\" title=\"" +
                 Pdata[8] + "\" class=\"fR\">" +
                 Pdata[9] + "</a><a href=\"#\" data-toggle=\"tooltip\" title=\"" +
@@ -24,14 +25,15 @@ function findByID(pID) {
                 Pdata[6] + "\">" +
                 Pdata[7] + "</a></div></div><div class=\"card-footer\">" +
                 Pdata[5] + "<div class=\"btn-group-sm fR\"><button type=\"button\" class=\"btn btn-sm btn-info\" data-toggle=\"modal\" data-target=\"#myModal\">编辑</button><button type=\"button\" class=\"btn btn-sm btn-danger\">删除</button></div></div></div></div>";
-            $("#AllExs").html(Content);
-            updat();
         }
+        $("#searchsult").html(Content);
+        updat();
     });
 
 }
 
 function updat() {
+    $(".disP-btn").unbind();
     $(".disP-btn").click(function () {//展开收缩
         $(this).parent().next(".disP").slideToggle("fast");
     });
@@ -46,11 +48,25 @@ $(function () {
     //     }
     //     $("#AllExs").html(Content);
     // });
-    $("#addr-btn").click(function () {//收藏弹出
-        $("#addr-notes").slideToggle("fast");
+    $("#addr-btn").click(function () {//点击地址本
+        $("#searchPage").slideUp("fast");
+        $("#historyPage").slideUp("fast");
+        $("#addrPage").slideDown("fast");
     });
+    $("#hisy-btn").click(function () {//点击历史
+        $("#searchPage").slideUp("fast");
+        $("#historyPage").slideDown("fast");
+        $("#addrPage").slideUp("fast");
+    });
+    $("#srch-btn").click(function () {//点击搜索
+        $("#searchPage").slideDown("fast");
+        $("#historyPage").slideUp("fast");
+        $("#addrPage").slideUp("fast");
+    });
+
     $("#searchcontent").keyup(function () {//搜索
         findByID($("#searchcontent").val());
     });
     updat();
 });
+
