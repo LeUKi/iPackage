@@ -17,14 +17,13 @@
             background-color: rgba(255, 255, 255, 0.70);
         }
     </style>
-    <link rel="stylesheet" href="icheck-bootstrap.css">
 </head>
 <body style="background: url(0.jpeg) no-repeat top fixed;">
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #461483">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #06003e">
     <div class="container col-md-8 col-lg-7 col-xl-5">
         <a class="navbar-brand" href="#">iPackage</a>
         <button type="button" id="addr-btn" class="btn btn-sm fa fa-address-book-o"
-                style="background-color: #461483;color: #ffffff">
+                style="background-color: #06003e;color: #ffffff">
         </button>
     </div>
 </nav>
@@ -37,39 +36,45 @@
     <br>
     <div class="card">
         <div class="card-body">
-            <input type="text" class="form-control" id="searchcontent">
-            <form>
+            <input type="text" class="form-control" id="searchcontent" placeholder="请输入快递单号..">
 
-                <input type="radio" id="someRadioId1" name="optradio"/>
-                <label class="radio-inline" type="radio" for="someRadioId1">Option 1</label>
-                <input type="radio" id="someRadioId1" name="optradio"/>
-                <label class="radio-inline" type="radio" for="someRadioId1">Option 1</label>
-                <input type="radio" id="someRadioId1" name="optradio"/>
-                <label class="radio-inline" type="radio" for="someRadioId1">Option 1</label>
-
-            </form>
         </div>
     </div>
     <div id="AllExs">快递列表</div>
+
+    <br>
     <div class="card">
-        <div class="card-header">
-            <div style="position: absolute;left: 40%;">寄件人
-                <div class="fa fa-arrow-right"> 收件人</div>
+        <div class="card-header" onclick="">快递单号：
+            <button type="button" class="btn btn-sm fR disP-btn">展开/收缩</button>
+        </div>
+        <div class="disP">
+            <div class="card-body">
+                <div style="position: absolute;left: 40%;">寄件人
+                    <div class="fa fa-arrow-right"> 收件人
+                    </div>
+                </div>
+                <a href="#" data-toggle="tooltip" title="135353535535" class="fR">收件人</a>
+
+                <a href="#" data-toggle="tooltip" title="969696969696!">寄件人</a>
+
+
+                <div class="card-body">
+                    快递类型：1 <br>快递内容：
+                </div>
+                <div class="card-body">
+                    收件地址：
+                    <a href="#" data-toggle="tooltip" title="地址编号：1">
+                        收件地址
+                    </a>
+                </div>
             </div>
-            <a href="#" data-toggle="tooltip" title="135353535535" class="fR">收件人</a>
-            <a href="#" data-toggle="tooltip" title="969696969696!">寄件人</a>
-        </div>
-        <div class="card-body">
-            <div class="card-body">快递类型：1</div>
-            <div class="card-body">收件地址：<a href="#" data-toggle="tooltip" title="969696969696!">收件地址</a></div>
-        </div>
-        <div class="card-footer">
-            寄件时间：2020-03-03T14:19:17.000+0000
-            <div class="btn-group-sm fR">
-                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">编辑
-                </button>
-                <button type="button" class="btn btn-sm btn-danger">删除
-                </button>
+            <div class="card-footer">
+                寄件时间：2020-03-03T14:19:17.000+0000
+                <div class="btn-group-sm fR">
+                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">编辑
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger">删除</button>
+                </div>
             </div>
         </div>
     </div>
