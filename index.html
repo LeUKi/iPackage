@@ -24,13 +24,13 @@
         <a class="navbar-brand" href="#">iPackage</a>
         <div class="fR">
             <button type="button" id="addr-btn" class="btn btn-sm fa fa-address-book-o"
-                    style="background-color: #06003e;color: #ffffff">地址簿
+                    style="background-color: #06003e;color: #ffffff"> 地址簿
             </button>
             <button type="button" id="hisy-btn" class="btn btn-sm fa fa-archive"
-                    style="background-color: #06003e;color: #ffffff">我的快递
+                    style="background-color: #06003e;color: #ffffff"> 我的快递
             </button>
             <button type="button" id="srch-btn" class="btn btn-sm fa fa-search"
-                    style="background-color: #06003e;color: #ffffff">添加快递
+                    style="background-color: #06003e;color: #ffffff"> 添加快递
             </button>
         </div>
     </div>
@@ -57,10 +57,10 @@
         <div class="card">
             <div class="card-body">
                 <input type="text" class="form-control" id="searchcontent" placeholder="请输入快递单号..">
-
             </div>
         </div>
-        <div id="searchsult">
+        <div id="searchsult"></div>
+        <div>
             <br>
             <div class="card">
                 <div class="card-header">在服务器中找不到快递?试试添加一个！
@@ -68,64 +68,81 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="mb-3">
-                        <div class="input-group ">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">寄件人</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="姓名" id="">
-                            <input type="text" class="form-control" placeholder="电话" id="">
-                        </div>
-                        <div class="input-group ">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">寄件人</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="姓名" id="">
-                            <input type="text" class="form-control" placeholder="电话" id="">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">确定</button>
 
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+
+                            <button type="button" class="btn btn-sm btn-primary fR fa fa-address-book-o"> 选择收件人</button>
+
+                        </div>
+                        <input type="text" class="form-control" placeholder="姓名" id="" disabled>
+                        <input type="text" class="form-control" placeholder="电话" id="" disabled>
+                    </div>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="地址" id="" disabled>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">寄件人</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="姓名" id="">
+                        <input type="text" class="form-control" placeholder="电话" id="">
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">快递类型</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="快递类型" id="">
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">快递内容</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="快递内容" id="">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">添加</button>
                 </div>
             </div>
-        </div><!--    搜索列表-->
-    </div>
-    <!--    <br>-->
-    <!--    <div class="card">-->
-    <!--        <div class="card-header" onclick="">快递单号：-->
-    <!--            <button type="button" class="btn btn-sm fR disP-btn">展开/收缩</button>-->
-    <!--        </div>-->
-    <!--        <div class="disP">-->
-    <!--            <div class="card-body">-->
-    <!--                <div style="position: absolute;left: 40%;">寄件人-->
-    <!--                    <div class="fa fa-arrow-right"> 收件人-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--                <a href="#" data-toggle="tooltip" title="135353535535" class="fR">收件人</a>-->
+        </div>
+    </div><!--    搜索列表-->
+</div>
+<!--    <br>-->
+<!--    <div class="card">-->
+<!--        <div class="card-header" onclick="">快递单号：-->
+<!--            <button type="button" class="btn btn-sm fR disP-btn">展开/收缩</button>-->
+<!--        </div>-->
+<!--        <div class="disP">-->
+<!--            <div class="card-body">-->
+<!--                <div style="position: absolute;left: 40%;">寄件人-->
+<!--                    <div class="fa fa-arrow-right"> 收件人-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <a href="#" data-toggle="tooltip" title="135353535535" class="fR">收件人</a>-->
 
-    <!--                <a href="#" data-toggle="tooltip" title="969696969696!">寄件人</a>-->
+<!--                <a href="#" data-toggle="tooltip" title="969696969696!">寄件人</a>-->
 
 
-    <!--                <div class="card-body">-->
-    <!--                    快递类型：1 <br>快递内容：-->
-    <!--                </div>-->
-    <!--                <div class="card-body">-->
-    <!--                    收件地址：-->
-    <!--                    <a href="#" data-toggle="tooltip" title="地址编号：1">-->
-    <!--                        收件地址-->
-    <!--                    </a>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--            <div class="card-footer">-->
-    <!--                寄件时间：2020-03-03T14:19:17.000+0000-->
-    <!--                <div class="btn-group-sm fR">-->
-    <!--                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">编辑-->
-    <!--                    </button>-->
-    <!--                    <button type="button" class="btn btn-sm btn-danger">删除</button>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
+<!--                <div class="card-body">-->
+<!--                    快递类型：1 <br>快递内容：-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!--                    收件地址：-->
+<!--                    <a href="#" data-toggle="tooltip" title="地址编号：1">-->
+<!--                        收件地址-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="card-footer">-->
+<!--                寄件时间：2020-03-03T14:19:17.000+0000-->
+<!--                <div class="btn-group-sm fR">-->
+<!--                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">编辑-->
+<!--                    </button>-->
+<!--                    <button type="button" class="btn btn-sm btn-danger">删除</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 
 
