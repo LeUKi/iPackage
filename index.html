@@ -23,46 +23,50 @@
     <div class="container col-md-8 col-lg-7 col-xl-5">
         <a class="navbar-brand" href="#">iPackage</a>
         <div class="fR">
-            <button type="button" class="btn btn-outline-light fa fa-address-book-o addr-btn"> 地址簿
+            <button class="btn btn-outline-light fa fa-address-card addr-btn"> 地址簿
             </button>
-            <button type="button" class="btn btn-outline-light fa fa-archive hisy-btn"> 我的快递
+            <button class="btn btn-outline-light fa fa-archive hisy-btn"> 我的快递
             </button>
-            <button type="button" class="btn btn-outline-light fa fa-search srch-btn"> 添加快递
+            <button class="btn btn-outline-light fa fa-search srch-btn"> 添加快递
             </button>
         </div>
     </div>
 </nav>
 <div class="container col-md-8 col-lg-7 col-xl-5" style="margin-top:70px">
     <div id="addrPage" style="display: none">
-        <br>
         <div class="card" id="addr-notes">
             <div class="card-body">
-                <div class="input-group "><input type="text" class="form-control" placeholder="姓名"
-                                                 id="newaddr-name"><input type="text" class="form-control"
-                                                                          placeholder="电话" id="newaddr-tell">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-success fR fa fa-plus"></button>
-                    </div>
+                <div class="input-group"><input type="text" class="form-control" placeholder="姓名"
+                                                id="newaddr-name">
+                    <input type="text" class="form-control"
+                           placeholder="电话" id="newaddr-tell">
                 </div>
-                <div class="input-group mb-2"><input type="text" class="form-control" placeholder="地址"
-                                                     id="newaddr-addr">
+                <div class="input-group"><input type="text" class="form-control" placeholder="地址"
+                                                id="newaddr-addr">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-sm btn-danger fR fa fa-times"></button>
+                        <button class="btn btn-sm btn-success fR fa fa-plus" id="newaddr-btn"> 添加地址</button>
                     </div>
                 </div>
             </div>
         </div>
-        <br>
         <div id="addrsult"></div>
     </div>
     <div id="historyPage" style="display: none">
-        <div id="histsult"></div>
+        <div class="card">
+            <div class="card-body">数据可视化</div>
+        </div>
+        <div id="histsult">
+        </div>
     </div>
     <div id="searchPage">
-        <br>
         <div class="card">
             <div class="card-body">
-                <input type="text" class="form-control" id="searchcontent" placeholder="在服务器中检索快递单号..">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-sm btn-primary fR fa fa-list-ol" id="showall"> 所有快递
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" id="searchcontent" placeholder="在服务器中检索快递单号.."></div>
             </div>
         </div>
         <div id="searchsult"></div>
@@ -77,19 +81,14 @@
                 <div class="card-body">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <button type="button" class="btn btn-sm btn-primary fR fa fa-address-book-o"
-                                    data-toggle="modal" data-target="#myModal"> 从地址簿选择
+                            <button class="btn btn-sm btn-info fR fa fa-address-card addr-btn"> 收件人
                             </button>
                         </div>
-                        <input type="text" class="form-control" placeholder="姓名" id="ok-addr-name" disabled>
+                        <input type="text" class="form-control" placeholder="姓名" id="ok-addr-name" addr-id="" disabled>
                         <input type="text" class="form-control" placeholder="电话" id="ok-addr-tell" disabled>
                     </div>
                     <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <button type="button" class="btn btn-sm btn-primary fa fa-plus addr-btn"> 创建收件地址
-                            </button>
-                        </div>
-                        <input type="text" class="form-control" placeholder="地址" id="okaddr-addr" disabled>
+                        <input type="text" class="form-control" placeholder="地址" id="ok-addr-addr" disabled>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -111,7 +110,7 @@
                         <input type="text" class="form-control" placeholder="快递内容" id="ok-content">
                     </div>
 
-                    <button type="submit" class="btn btn-success fa fa-archive fR"> 添加到我的快递</button>
+                    <button class="btn btn-success fa fa-archive fR" id="newpg-btn"> 上传并添加到我的快递</button>
                 </div>
             </div>
         </div>
@@ -125,13 +124,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">头部</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 主体
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>
+                <button class="btn btn-success" data-dismiss="modal">确定</button>
             </div>
         </div>
     </div>
