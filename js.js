@@ -103,7 +103,7 @@ function showAddr() {//显示‍地址簿
                 Adata[3] = data.extended.Adress.recipient;
                 var addrlist = "<br><div class=\"card\" id=\"addr-notes\"><div class=\"card-body\"><div class=\"input-group \"><input type=\"text\" class=\"form-control\" placeholder=\"" +
                     Adata[3] + "\" disabled><input type=\"text\" class=\"form-control\" placeholder=\"" +
-                    Adata[2] + "\" disabled><div class=\"input-group-append\"><button data-toggle=\"modal\" data-target=\"#myModal\" chaddr=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-primary fR fa fa-pencil\"> 改</button><button deladdr=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-danger fR fa fa-times\"> 删</button></div></div><div class=\"input-group\"><input type=\"text\" class=\"form-control\" placeholder=\"" +
+                    Adata[2] + "\" disabled><div class=\"input-group-append\"><button data-toggle=\"modal\" data-target=\"#myModal\" chaddr=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-primary fR fa fa-pencil\"></button><button deladdr=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-danger fR fa fa-times\"></button></div></div><div class=\"input-group\"><input type=\"text\" class=\"form-control\" placeholder=\"" +
                     Adata[1] + "\" disabled><div class=\"input-group-append\"><button tonew=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-info fR fa fa-paper-plane tonew\"> 创建新快递</button></div></div></div></div>";
                 $("#addrsult").append(addrlist);
                 lisenaddr();
@@ -198,7 +198,7 @@ function showmyPg() {
                     Pdata[3] + "<br>收件地址：<span data-toggle=\"tooltip\" title=\"地址编号：" +
                     Pdata[6] + "\">" +
                     Pdata[7] + "</span></div></div><div class=\"card-footer\">" +
-                    Pdata[5] + "<div class=\"btn-group-sm fR\"><button type=\"button\" class=\"btn btn-sm btn-primary fa fa-pencil\" data-toggle=\"modal\" data-target=\"#myModal\"></button><button type=\"button\" class=\"btn btn-sm btn-danger fa fa-trash-o\" data-toggle=\"tooltip\" title=\"这将从服务器中删除\"></button></div></div></div></div>";
+                    Pdata[5] + "<div class=\"btn-group-sm fR\"><button type=\"button\" class=\"btn btn-sm btn-primary fa fa-pencil\" data-toggle=\"modal\" data-target=\"#myModal\"></button><button type=\"button\" class=\"btn btn-sm btn-danger fa fa-times\" data-toggle=\"tooltip\" title=\"仅清除本地\"></button></div></div></div></div>";
                 $("#histsult").append(Content);
                 updat()
             });
@@ -206,6 +206,7 @@ function showmyPg() {
         }
 
     }
+    showecharts();
 }
 
 function newpg() {
@@ -239,6 +240,28 @@ function newpg() {
     }
 }
 
+function showecharts() {
+
+    var myChart = echarts.init(document.getElementById('main'), 'shine');
+    myChart.setOption({
+        series: [
+            {
+                name: '包裹分布',
+                type: 'pie',
+                radius: '60%',
+                data: [          // 数据数组，name 为数据项名称，value 为数据项值
+                    {value: 235, name: '视频广告'},
+                    {value: 274, name: '联盟广告'},
+                    {value: 310, name: '邮件营销'},
+                    {value: 335, name: '直接访问'},
+                    {value: 400, name: '搜索引擎'}
+                ]
+            }
+        ],
+        tooltip: {}
+    })
+}
+
 $(function () {
     $(".addr-btn").click(function () {//点击地址本
         $("#searchPage").slideUp("fast");
@@ -256,6 +279,7 @@ $(function () {
         $("#searchPage").slideDown("fast");
         $("#historyPage").slideUp("fast");
         $("#addrPage").slideUp("fast");
+        $("#searchsult").html("");
     });
     $("#newaddr-btn").click(function () {//初始化地址添加按钮
         newaddr();

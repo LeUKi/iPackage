@@ -8,6 +8,7 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
     <style>
         .fR {
             float: right;
@@ -17,6 +18,7 @@
             background-color: rgba(255, 255, 255, 0.70);
         }
     </style>
+    <script src="shine.js"></script>
 </head>
 <body style="background: url(0.jpeg) no-repeat top fixed;">
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #06003e">
@@ -36,12 +38,12 @@
     <div id="addrPage" style="display: none">
         <div class="card" id="addr-notes">
             <div class="card-body">
-                <div class="input-group"><input type="text" class="form-control" placeholder="姓名"
+                <div class="input-group"><input type="text" class="form-control" placeholder="收件姓名"
                                                 id="newaddr-name">
                     <input type="text" class="form-control"
-                           placeholder="电话" id="newaddr-tell">
+                           placeholder="收件电话" id="newaddr-tell">
                 </div>
-                <div class="input-group"><input type="text" class="form-control" placeholder="地址"
+                <div class="input-group"><input type="text" class="form-control" placeholder="收件地址"
                                                 id="newaddr-addr">
                     <div class="input-group-append">
                         <button class="btn btn-sm btn-success fR fa fa-plus" id="newaddr-btn"> 添加地址</button>
@@ -53,7 +55,11 @@
     </div>
     <div id="historyPage" style="display: none">
         <div class="card">
-            <div class="card-body">数据可视化</div>
+            <div class="card-body">
+                <div id="main"
+                     style="width: 400px;height:400px;display: -webkit-flex;display: flex;justify-content: center;align-items: center">
+                </div>
+            </div>
         </div>
         <div id="histsult">
         </div>
@@ -84,11 +90,12 @@
                             <button class="btn btn-sm btn-info fR fa fa-address-card addr-btn"> 收件人
                             </button>
                         </div>
-                        <input type="text" class="form-control" placeholder="姓名" id="ok-addr-name" addr-id="" disabled>
-                        <input type="text" class="form-control" placeholder="电话" id="ok-addr-tell" disabled>
+                        <input type="text" class="form-control" placeholder="收件姓名" id="ok-addr-name" addr-id=""
+                               disabled>
+                        <input type="text" class="form-control" placeholder="收件电话" id="ok-addr-tell" disabled>
                     </div>
                     <div class="input-group mb-2">
-                        <input type="text" class="form-control" placeholder="地址" id="ok-addr-addr" disabled>
+                        <input type="text" class="form-control" placeholder="收件地址" id="ok-addr-addr" disabled>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -130,7 +137,12 @@
                 主体
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal">确定</button>
+                <button class="btn btn-danger" data-dismiss="modal">
+                    <div class="fa fa-trash"> 从服务器删除</div>
+                </button>
+                <button class="btn btn-success" data-dismiss="modal">
+                    <div class="fa fa-check"></div>
+                </button>
             </div>
         </div>
     </div>
