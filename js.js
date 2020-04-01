@@ -50,7 +50,7 @@ function showall() {
             Pdata[4] = list[x].goods_type;
             Pdata[5] = list[x].send_time;
             Pdata[6] = list[x].adress.id;
-            Pdata[7] = list[x].adress.adr
+            Pdata[7] = list[x].adress.adr;
             Pdata[8] = list[x].adress.phone;
             Pdata[9] = list[x].adress.recipient;
             Content += "<br><div class=\"card\"><div class=\"card-header\"><div class='fa fa-archive'> ID-</div>" +
@@ -188,7 +188,7 @@ function showmyPg() {
                     Pdata[0] + " <button type=\"button\" class=\"btn btn-sm fR disP-btn\">展开/收缩</button></div><div class=\"disP\" style='display: none'><div class=\"card-body\">" +
                     "<div style=\"position: absolute;left: 40%;\">寄件人<div class=\"fa fa-arrow-right\"> 收件人</div></div>" +
                     "<span data-toggle=\"tooltip\" style='float: left' title=\"" +
-                    Pdata[2] + "\"><h2>" +
+                    Pdata[2] + "\"><h2 class=\'senders\'>" +
                     Pdata[1] + "</h2></span>" +
                     "<span data-toggle=\"tooltip\" title=\"" +
                     Pdata[8] + "\" class=\"fR\"><h2>" +
@@ -241,21 +241,17 @@ function newpg() {
 }
 
 function showecharts() {
+    alert(JSON.stringify($(".senders").html()));
+    var data1 = [];
 
     var myChart = echarts.init(document.getElementById('main'), 'shine');
     myChart.setOption({
         series: [
             {
-                name: '包裹分布',
+                name: '收件统计',
                 type: 'pie',
                 radius: '60%',
-                data: [          // 数据数组，name 为数据项名称，value 为数据项值
-                    {value: 235, name: '视频广告'},
-                    {value: 274, name: '联盟广告'},
-                    {value: 310, name: '邮件营销'},
-                    {value: 335, name: '直接访问'},
-                    {value: 400, name: '搜索引擎'}
-                ]
+                data: data1
             }
         ],
         tooltip: {}
