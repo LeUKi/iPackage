@@ -171,7 +171,61 @@ function lisenaddr() {
             $("#ok-addr-addr").attr("placeholder", data.extended.Adress.adr);
         })
     });
+    $("[chaddr]").unbind();
+    $("[chaddr]").click(function () {
+        $("#mtk-head").html("<div class=\"fa fa-address-card\"> 地址修改 AddressID-" + $(this).attr("chaddr") + "</div>");
+        var getUrl = "http://118.178.125.139:8080/findByAdressID?id=" + $(this).attr("chaddr");
+        $.get(getUrl, function (data, status) {
+            $("#mtk-body").html("<div class=\"input-group\"><input type=\"text\" class=\"form-control\" placeholder=\"收件姓名\" id=\"chaddr-name\"/><input type=\"text\" class=\"form-control\" placeholder=\'收件电话\' id=\'chaddr-tell\'/></div> <div class=\'input-group\'><input type=\'text\' class=\'form-control\' placeholder=\'收件地址\' id=\'chaddr-addr\'/></div>");
+            $("#chaddr-name").val(data.extended.Adress.recipient);
+            $("#chaddr-addr").val(data.extended.Adress.adr);
+            $("#chaddr-tell").val(data.extended.Adress.phone);
+            $("#okokok").unbind();
+            $("#okokok").click(function () {
+                var temp = "http://118.178.125.139:8080/updateAdress?adr=" + $("#chaddr-addr").val() + "&id=" + data.extended.Adress.id +
+                    "&phone=" + $("#chaddr-tell").val() + "&recipient=" + $("#chaddr-name").val();
+                $.post(temp, function () {
+                        showAddr();
+                    }
+                )
+            });
+        });
+    });
 }
+
+function lisenPg() {
+    $("[delpgid]").unbind();
+    $("[delpgid]").click(function () {
+        var temp1 = JSON.parse(localStorage.myPackagesid);
+        var temp2 = temp1.indexOf($(this).attr("delpgid"));
+        temp1.splice(temp2, 1);
+        localStorage.myPackagesid = JSON.stringify(temp1);
+        showmyPg();
+    });
+    $("[chpg]").unbind();
+    $("[chpg]").click(function () {
+        $("#mtk-head").html("<div class=\"fa fa-archive\"> 修改快递 ID-" + $(this).attr("chpg") + "</div>");
+        var getUrl = "http://118.178.125.139:8080/findByExpressOrderID?id=" + $(this).attr("chpg");
+        $.get(getUrl, function (data, status) {
+            $("#mtk-body").html("<div class=\"input-group mb-2\"><div class=\"input-group-prepend\"><span class=\"input-group-text\">AddressID</span></div><input type=\"text\" class=\"form-control\" placeholder=\"AddressID\" id=\"chpg-addrid\"></div><div class=\"input-group mb-2\"><div class=\"input-group-prepend\"><span class=\"input-group-text\">寄件人</span></div><input type=\"text\" class=\"form-control\" placeholder=\"姓名\" id=\"chpg-sender-name\"><input type=\"text\" class=\"form-control\" placeholder=\"电话\" id=\"chpg-sender-tell\"></div><div class=\"input-group mb-2\"><div class=\"input-group-prepend\"><span class=\"input-group-text\">快递类型</span></div><input type=\"text\" class=\"form-control\" placeholder=\"快递类型\" id=\"chpg-kind\"></div><div class=\"input-group mb-2\"><div class=\"input-group-prepend\"><span class=\"input-group-text\">快递内容</span></div><input type=\"text\" class=\"form-control\" placeholder=\"快递内容\" id=\"chpg-content\"></div>");
+            $("#okokok").unbind();
+            $("#okokok").click(function () {
+                var temp = "http://118.178.125.139:8080/updateExpressOrder?aid=" + $("#chpg-addrid").val() + "&goods_name=" + $("#chpg-content").val() + "&goods_type=" + $("#chpg-kind").val() + "&id=" + data.extended.ExpressOrder.id + "&sender=" + $("#chpg-sender-name").val() + "&sender_phone=" + $("#chpg-sender-tell").val();
+                alert(temp);
+                $.post(temp, function () {
+                        showmyPg();
+                    }
+                );
+            });
+            $("#chpg-addrid").val(data.extended.ExpressOrder.adress.id);
+            $("#chpg-sender-name").val(data.extended.ExpressOrder.sender);
+            $("#chpg-sender-tell").val(data.extended.ExpressOrder.sender_phone);
+            $("#chpg-kind").val(data.extended.ExpressOrder.goods_type);
+            $("#chpg-content").val(data.extended.ExpressOrder.goods_name);
+        });
+    });
+}
+
 
 function newaddr() {
     var name = $("#newaddr-name").val();
@@ -236,7 +290,7 @@ function showmyPg() {
                     Pdata[3] + "<br>收件地址：<span data-toggle=\"tooltip\" title=\"地址编号：" +
                     Pdata[6] + "\">" +
                     Pdata[7] + "</span></div></div><div class=\"card-footer\">" +
-                    Pdata[5] + "<div class=\"btn-group-sm fR\"><button type=\"button\" class=\"btn btn-sm btn-primary fa fa-pencil\" data-toggle=\"modal\" data-target=\"#myModal\"></button><button type=\"button\" class=\"btn btn-sm btn-danger fa fa-times\" data-toggle=\"tooltip\" title=\"仅清除本地\"></button></div></div></div></div>";
+                    Pdata[5] + "<div class=\"btn-group-sm fR\"><button chpg=\'" + Pdata[0] + "\' type=\"button\" class=\"btn btn-sm btn-primary fa fa-pencil\" data-toggle=\"modal\" data-target=\"#myModal\"></button><button type=\"button\" class=\"btn btn-sm btn-danger fa fa-times\" delpgid=\'" + Pdata[0] + "\' data-toggle=\"tooltip\" title=\"仅清除本地\"></button></div></div></div></div>";
                 $("#histsult").append(Content);
                 if (namelist[Pdata[9]] == undefined) {
                     namelist[Pdata[9]] = 1;
@@ -245,11 +299,11 @@ function showmyPg() {
                 }
                 localStorage.recnamelist = JSON.stringify(namelist);
                 updat();
+                lisenPg();
+                showecharts();
             });
         }
-
     }
-    showecharts();
 }
 
 function newpg() {
