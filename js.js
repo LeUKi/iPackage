@@ -30,13 +30,50 @@ function findByID(pID, innerwhere) {//插入结果
                 Pdata[7] + "</span></div></div><div class=\"card-footer\">" +
                 Pdata[5] + "<div class=\"btn-group-sm fR\"><button onclick=\"addPg(" + Pdata[0] + ',' + Pdata[6] + ")\" type=\"button\" class=\"btn btn-sm btn-success fa fa-archive\"> 添加到我的快递</button></div></div></div></div>";
         }
-        innerwhere.html(Content);
+        $("#searchsult").html(Content);
+        updat();
+    });
+}
+
+function findbyname(name1) {
+    var getUrl = "http://118.178.125.139:8080/findOrder?recipient=" + name1;
+    $.get(getUrl, function (data, status) {
+        var Content = "";
+        var list = data.extended.List[0].expressOrders;
+        var Pdata = [];
+        Pdata[6] = data.extended.List[0].id;//
+        Pdata[7] = data.extended.List[0].adr;//
+        Pdata[8] = data.extended.List[0].phone;//
+        Pdata[9] = data.extended.List[0].recipient;//
+        for (x in list) {
+            Pdata[0] = list[x].id;
+            Pdata[1] = list[x].sender;
+            Pdata[2] = list[x].sender_phone;
+            Pdata[3] = list[x].goods_name;
+            Pdata[4] = list[x].goods_type;
+            Pdata[5] = list[x].send_time;
+            Content += "<br><div class=\"card\"><div class=\"card-header\"><div class='fa fa-archive'> ID-</div>" +
+                Pdata[0] + " <button type=\"button\" class=\"btn btn-sm fR disP-btn\">展开/收缩</button></div><div class=\"disP\"><div class=\"card-body\">" +
+                "<div style=\"position: absolute;left: 40%;\">寄件人<div class=\"fa fa-arrow-right\"> 收件人</div></div>" +
+                "<span data-toggle=\"tooltip\" style='float: left' title=\"" +
+                Pdata[2] + "\"><h2>" +
+                Pdata[1] + "</h2></span>" +
+                "<span data-toggle=\"tooltip\" title=\"" +
+                Pdata[8] + "\" class=\"fR\"><h2>" +
+                Pdata[9] + "</h2></span>" +
+                "<br><br><div class=\"card-body\">快递类型：" +
+                Pdata[4] + "<br>快递内容：" +
+                Pdata[3] + "<br>收件地址：<span data-toggle=\"tooltip\" title=\"地址编号：" +
+                Pdata[6] + "\">" +
+                Pdata[7] + "</span></div></div><div class=\"card-footer\">" +
+                Pdata[5] + "<div class=\"btn-group-sm fR\"><button onclick=\"addPg(" + Pdata[0] + ',' + Pdata[6] + ")\" type=\"button\" class=\"btn btn-sm btn-success fa fa-archive\"> 添加到我的快递</button></div></div></div></div>";
+        }
+        $("#searchsult").html(Content);
         updat();
     });
 }
 
 function showall() {
-    var Content = "";
     var getUrl = "http://118.178.125.139:8080/findAllExpressOrder";
     $.get(getUrl, function (data, status) {
         var Content = "";
@@ -170,6 +207,7 @@ function showmyPg() {
     $("#histsult").html("<br><div class=\'card\'><div class=\"card-body\">你还没有快递哦！<br>你可以点击 <button type=\"button\" class=\"btn btn-sm bg-primary fa fa-search srch-btn\" style=\"color: white\"> 添加快递</button> 以搜索或添加你的快递。</div></divc>");
     if (Pgidlist.length != 0) {
         $("#histsult").html("");
+        var namelist = {};
         for (x in Pgidlist) {
             var getUrl = "http://118.178.125.139:8080/findByExpressOrderID?id=" + Pgidlist[x];
             $.get(getUrl, function (data, status) {
@@ -191,7 +229,7 @@ function showmyPg() {
                     Pdata[2] + "\"><h2 class=\'senders\'>" +
                     Pdata[1] + "</h2></span>" +
                     "<span data-toggle=\"tooltip\" title=\"" +
-                    Pdata[8] + "\" class=\"fR\"><h2>" +
+                    Pdata[8] + "\" class=\"fR\"><h2 class=\'recname\'>" +
                     Pdata[9] + "</h2></span>" +
                     "<br><br><div class=\"card-body\">快递类型：" +
                     Pdata[4] + "<br>快递内容：" +
@@ -200,9 +238,14 @@ function showmyPg() {
                     Pdata[7] + "</span></div></div><div class=\"card-footer\">" +
                     Pdata[5] + "<div class=\"btn-group-sm fR\"><button type=\"button\" class=\"btn btn-sm btn-primary fa fa-pencil\" data-toggle=\"modal\" data-target=\"#myModal\"></button><button type=\"button\" class=\"btn btn-sm btn-danger fa fa-times\" data-toggle=\"tooltip\" title=\"仅清除本地\"></button></div></div></div></div>";
                 $("#histsult").append(Content);
-                updat()
+                if (namelist[Pdata[9]] == undefined) {
+                    namelist[Pdata[9]] = 1;
+                } else {
+                    namelist[Pdata[9]] += 1;
+                }
+                localStorage.recnamelist = JSON.stringify(namelist);
+                updat();
             });
-
         }
 
     }
@@ -241,16 +284,21 @@ function newpg() {
 }
 
 function showecharts() {
-    alert(JSON.stringify($(".senders").html()));
+    var list = JSON.parse(localStorage.recnamelist);
     var data1 = [];
-
-    var myChart = echarts.init(document.getElementById('main'), 'shine');
+    for (x in list) {
+        var temp = {};
+        temp.value = list[x];
+        temp.name = x;
+        data1.unshift(temp);
+    }
+    var myChart = echarts.init(document.getElementById('main'));
     myChart.setOption({
         series: [
             {
                 name: '收件统计',
                 type: 'pie',
-                radius: '60%',
+                radius: '90%',
                 data: data1
             }
         ],
@@ -289,7 +337,11 @@ $(function () {
     });
 
     $("#searchcontent").keyup(function () {//搜索
-        findByID($("#searchcontent").val(), $("#searchsult"), 1);
+        if (isNaN($("#searchcontent").val())) {
+            findbyname($("#searchcontent").val());
+        } else {
+            findByID($("#searchcontent").val());
+        }
     });
     updat();//挂载控件
     if (localStorage.myPackagesid == undefined) {//localStorage预加载
