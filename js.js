@@ -309,11 +309,12 @@ function showmyPg() {
                 }
                 localStorage.recnamelist = JSON.stringify(namelist);
                 updat();
-                lisenPg();
+
                 showecharts();
             });
         }
     }
+    lisenPg();
 }
 
 function newpg() {
