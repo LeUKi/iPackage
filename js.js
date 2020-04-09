@@ -143,18 +143,24 @@ function showAddr() {//显示‍地址簿
                     Adata[2] + "\" disabled><div class=\"input-group-append\"><button data-toggle=\"modal\" data-target=\"#myModal\" chaddr=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-primary fR fa fa-pencil\"></button><button deladdr=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-danger fR fa fa-times\"></button></div></div><div class=\"input-group\"><input type=\"text\" class=\"form-control\" placeholder=\"" +
                     Adata[1] + "\" disabled><div class=\"input-group-append\"><button tonew=\"" + Adata[0] + "\" type=\"button\" class=\"btn btn-sm btn-info fR fa fa-paper-plane tonew\"> 创建新快递</button></div></div></div></div>";
                 $("#addrsult").append(addrlist);
-                lisenaddr();
+
             })
         }
+
     }
+    lisenaddr();
 }
 
 function lisenaddr() {
     $("[deladdr]").unbind();
     $("[deladdr]").click(function (e) {
         var temp1 = JSON.parse(localStorage.addrid);
-        var temp2 = temp1.indexOf($(this).attr("chaddr"));
-        temp1.splice(temp2, 1);
+        for (var i = 0; i < temp1.length; i++) {
+            if (temp1[i] == $(this).attr("deladdr")) {
+                temp1.splice(i, 1);
+                break;
+            }
+        }
         localStorage.addrid = JSON.stringify(temp1);
         showAddr();
     });
@@ -197,8 +203,12 @@ function lisenPg() {
     $("[delpgid]").unbind();
     $("[delpgid]").click(function () {
         var temp1 = JSON.parse(localStorage.myPackagesid);
-        var temp2 = temp1.indexOf($(this).attr("delpgid"));
-        temp1.splice(temp2, 1);
+        for (var i = 0; i < temp1.length; i++) {
+            if (temp1[i] == $(this).attr("delpgid")) {
+                temp1.splice(i, 1);
+                break;
+            }
+        }
         localStorage.myPackagesid = JSON.stringify(temp1);
         showmyPg();
     });
@@ -361,6 +371,10 @@ function showecharts() {
 }
 
 $(function () {
+    $.ajaxSetup(
+        {
+            async: false
+        });
     $(".addr-btn").click(function () {//点击地址本
         $("#searchPage").slideUp("fast");
         $("#historyPage").slideUp("fast");
