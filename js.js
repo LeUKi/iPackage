@@ -270,6 +270,7 @@ function updat() {
 
 function showmyPg() {
     var Pgidlist = JSON.parse(localStorage.myPackagesid);
+    $("#main").html("");
     $("#histsult").html("<br><div class=\'card\'><div class=\"card-body\">你还没有快递哦！<br>你可以点击 <button type=\"button\" class=\"btn btn-sm bg-primary fa fa-search srch-btn\" style=\"color: white\"> 添加快递</button> 以搜索或添加你的快递。</div></divc>");
     if (Pgidlist.length != 0) {
         $("#histsult").html("");
