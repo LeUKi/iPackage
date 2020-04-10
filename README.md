@@ -1,5 +1,6 @@
 # iPackage
 > 基于font-awesome、echarts、jQuery与Bootstrap的快递管理网站。（考核作品）
+
 ![GitHub](https://img.shields.io/github/license/LeUKi/iPackage)
 ![GitHub last commit](https://img.shields.io/github/last-commit/LeUKi/iPackage)
 - 添加一个收快递的地址信息（包括收件人和手机号码）
