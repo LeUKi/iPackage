@@ -369,7 +369,7 @@ function showecharts() {
             {
                 name: '收件统计',
                 type: 'pie',
-                radius: '90%',
+                radius: '70%',
                 data: data1
             }
         ],
