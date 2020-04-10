@@ -147,6 +147,8 @@ function showAddr() {//显示‍地址簿
             })
         }
 
+    } else {
+        $("#addrsult").html("<br><div class=\'card\'><div class=\"card-body\"><h4>你的地址簿没有记录联系人。</h4><br>在服务器检索<strong>添加快递</strong>时会一并记录，<br>你也可以在上方直接<strong>添加地址</strong>。</div></div>");
     }
     lisenaddr();
 }
@@ -302,20 +304,21 @@ function showmyPg() {
                     Pdata[7] + "</span></div></div><div class=\"card-footer\">" +
                     Pdata[5] + "<div class=\"btn-group-sm fR\"><button chpg=\'" + Pdata[0] + "\' type=\"button\" class=\"btn btn-sm btn-primary fa fa-pencil\" data-toggle=\"modal\" data-target=\"#myModal\"></button><button type=\"button\" class=\"btn btn-sm btn-danger fa fa-times\" delpgid=\'" + Pdata[0] + "\' data-toggle=\"tooltip\" title=\"仅清除本地\"></button></div></div></div></div>";
                 $("#histsult").append(Content);
-                if (namelist[Pdata[9]] == undefined) {
-                    namelist[Pdata[9]] = 1;
+                if (namelist[Pdata[chartype]] == undefined) {
+                    namelist[Pdata[chartype]] = 1;
                 } else {
-                    namelist[Pdata[9]] += 1;
+                    namelist[Pdata[chartype]] += 1;
                 }
                 localStorage.recnamelist = JSON.stringify(namelist);
                 updat();
-
                 showecharts();
             });
         }
     }
     lisenPg();
 }
+
+var chartype = 4;
 
 function newpg() {
     if ($("#ok-addr-name").attr("addr-id")) {
@@ -368,10 +371,25 @@ function showecharts() {
             }
         ],
         tooltip: {}
-    })
+    });
 }
 
 $(function () {
+    $("#chartpye1").click(function () {
+        chartype = 9;
+        showmyPg();
+
+    });
+    $("#chartpye2").click(function () {
+        chartype = 4;
+        showmyPg();
+
+    });
+    $("#chartpye3").click(function () {
+        chartype = 1;
+        showmyPg();
+
+    });
     $.ajaxSetup(
         {
             async: false
